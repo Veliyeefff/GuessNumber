@@ -83,7 +83,6 @@ function LoseGame() {
 
 function DecreaseScore() {
     defaultScore--;
-    console.log(defaultScore);
 }
 
 function ShowScore() {
