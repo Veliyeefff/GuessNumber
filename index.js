@@ -1,49 +1,49 @@
-'use strict'
+'use strict';
+
 // Select elements
 const gameContainer = document.querySelector('.game-container');
 const gameAgainBtn = document.querySelector('.again');
-const gameNumberBox = document.querySelector('.game-number')
+const gameNumberBox = document.querySelector('.game-number');
 const gameInput = document.querySelector('.guest-input');
 const gameCheckBtn = document.querySelector('.check');
-const message = document.querySelector('.message')
-const score = document.querySelector('.score')
-const highScore = document.querySelector('.highscore')
+const message = document.querySelector('.message');
+const score = document.querySelector('.score');
+const highScore = document.querySelector('.highscore');
 
 // Create Random Number
 const guessNumber = Math.trunc(Math.random() * 20) + 1;
 
 //Declare Score and HighScore
-
 let defaultScore = 20;
 let defaultHighScore = sessionStorage.getItem('highscore') ? sessionStorage.getItem('highscore') : 0;
 
 // Initialization
-init()
+init();
 
 // Main Function
 function init() {
-    CheckGuessNumber()
-    RestartGame()
-    setHighScore()
-    CheckInputCorrect()
+    CheckGuessNumber();
+    RestartGame();
+    setHighScore();
+    CheckInputCorrect();
 }
 
 function CheckGuessNumber() {
-    gameCheckBtn.addEventListener('click', CompareNumbers)
+    gameCheckBtn.addEventListener('click', CompareNumbers);
 }
 
 function CompareNumbers() {
     if (gameInput.valueAsNumber > guessNumber) {
-        message.textContent = '📉 Too high!'
-        LoseGame()
+        message.textContent = '📉 Too high!';
+        LoseGame();
     } else if (gameInput.valueAsNumber < guessNumber) {
-        message.textContent = '📈 Too low!'
-        LoseGame()
+        message.textContent = '📈 Too low!';
+        LoseGame();
     } else if (gameInput.valueAsNumber == guessNumber) {
-        message.textContent = '🎉 Correct number!'
-        WinGame()
+        message.textContent = '🎉 Correct number!';
+        WinGame();
     }
-    ShowScore()
+    ShowScore();
 }
 
 function WinGame() {
@@ -53,7 +53,7 @@ function WinGame() {
     }
     sessionStorage.setItem('highscore', defaultHighScore)
     highScore.textContent = defaultHighScore;
-    ShowGuessNumber()
+    ShowGuessNumber();
 }
 
 function setHighScore() {
@@ -61,23 +61,23 @@ function setHighScore() {
 }
 
 function ShowGuessNumber() {
-    gameNumberBox.innerText = guessNumber
+    gameNumberBox.innerText = guessNumber;
 }
 
 function RestartGame() {
     gameAgainBtn.addEventListener('click', function () {
-        location.reload()
+        location.reload();
     })
 }
 
 function LoseGame() {
     if (defaultScore > 0) {
-        DecreaseScore()
+        DecreaseScore();
     }
     if (defaultScore == 0) {
         gameContainer.style.backgroundColor = '#c80000';
-        ShowGuessNumber()
-        message.textContent = '😓 Try again!'
+        ShowGuessNumber();
+        message.textContent = '😓 Try again!';
     }
 }
 
@@ -92,7 +92,7 @@ function ShowScore() {
 function CheckInputCorrect() {
     gameInput.addEventListener('input', function (e) {
         if (gameInput.valueAsNumber > 20 || gameInput.valueAsNumber < 0) {
-            e.target.value = ''
+            e.target.value = '';
         }
     })
 }
